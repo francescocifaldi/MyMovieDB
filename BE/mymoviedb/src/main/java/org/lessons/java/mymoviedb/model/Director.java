@@ -35,4 +35,52 @@ public class Director {
     @OneToMany(mappedBy = "director", cascade = { CascadeType.REMOVE })
     private List<Movie> movies;
 
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return this.surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return this.dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getCareer() {
+        return this.career;
+    }
+
+    public void setCareer(String career) {
+        this.career = career;
+    }
+
+    public List<Movie> getMovies() {
+        return this.movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
 }

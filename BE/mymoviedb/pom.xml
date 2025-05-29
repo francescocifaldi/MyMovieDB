@@ -63,6 +63,20 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+				<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>5.3.5</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/fontawesome -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>fontawesome</artifactId>
+			<version>4.7.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

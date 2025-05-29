@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.5/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <th:block th:each="movie : ${movies}" th:object="${movie}">
+                    <tr>
+                        <td>[[*{title}]]</td>
+                        <td>[[*{duration}]]</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary">BTN</a>
+                            <a href="#" class="btn btn-sm btn-primary">BTN</a>
+                            <a href="#" class="btn btn-sm btn-danger">BTN</a>
+                        </td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
