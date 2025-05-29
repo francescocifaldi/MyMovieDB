@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "movies")
@@ -31,7 +32,7 @@ public class Movie {
     @Min(value = 1, message = "Duration must be at least 1 minute")
     private Integer duration;
 
-    @NotBlank(message = "A movie must have a publication date")
+    @NotNull(message = "A movie must have a publication date")
     private Integer publicationYear;
 
     @Lob
@@ -39,11 +40,13 @@ public class Movie {
 
     @ManyToMany
     @JoinTable(name = "category_movie", joinColumns = @JoinColumn(name = "film_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @Size(min = 1, message = "A movie must have at least one category")
     private List<Category> categories;
 
     @ManyToOne
     @JoinColumn(name = "director_id", nullable = false)
     @JsonBackReference
+    @NotNull(message = "A movie must have director")
     private Director director;
 
     public Integer getId() {

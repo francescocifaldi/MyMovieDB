@@ -1,0 +1,18 @@
+package org.lessons.java.mymoviedb.service;
+
+import java.util.List;
+
+import org.lessons.java.mymoviedb.model.Director;
+import org.lessons.java.mymoviedb.repository.DirectorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class DirectorService {
+    @Autowired
+    private DirectorRepository directorRepository;
+
+    public List<Director> findAll() {
+        return directorRepository.findAll();
+    }
+}

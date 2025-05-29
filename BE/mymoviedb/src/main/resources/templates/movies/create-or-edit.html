@@ -11,32 +11,81 @@
 <th:block th:replace="~{fragments :: header}"></th:block>
 
 <body>
-    <form id="movie-form" action="@{/movies/create}" method="post" th:object="${movie}">
+    <form id="movie-form" th:action="@{/movies/create}" method="post" th:object="${movie}">
+
+        <input type="hidden" th:field="*{id}" />
+
         <div class="mb-2">
             <label for="title" class="form-label">Titolo</label>
-            <input type="text" id="title" name="title" class="form-control" required th:field="*{title}">
+            <input type="text" id="title" name="title" class="form-control" required th:field="*{title}"
+                th:errorclass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                </ul>
+            </div>
         </div>
 
         <div class="mb-2">
             <label for="duration" class="form-label">Durata:</label>
-            <input type="number" id="duration" name="duration" class="form-control" required th:field="*{duration}">
+            <input type="number" id="duration" name="duration" class="form-control" required th:field="*{duration}"
+                th:errorclass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('duration')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('duration')}" th:text="${err}"></li>
+                </ul>
+            </div>
         </div>
 
         <div class="mb-2">
             <label for="description" class="form-label">Descrizione</label>
-            <input type="textarea" id="description" name="description" class="form-control" required
-                th:field="*{description}">
+            <input type="textarea" id="description" name="description" class="form-control" th:field="*{description}">
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Copertina</label>
+            <input class="form-control" type="file" id="image" name="image" accept="image/*">
         </div>
 
         <div class="mb-2">
-            <label class="form-label">Categorie</label> <a href="#" title="Aggiungi una nuova categoria"
-                class="btn btn-danger btn-sm"><i class="fa-solid fa-plus"></i></a>
+            <label class="form-label">Categorie</label>
+            <a href="#" title="Aggiungi una nuova categoria" class="btn btn-danger btn-sm">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+
             <div class="form-check" th:each="category : ${categories}">
                 <input type="checkbox" class="form-check-input" th:id="'category-'+${category.id}"
-                    th:field="${movie.categories}" th:value="${category.id}">
+                    th:field="${movie.categories}" th:value="${category.id}" th:errorclass="is-invalid">
                 <label class="form-check-label" th:for="'category-'+${category.id}">[[${category.name}]]</label>
             </div>
+            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('categories')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('categories')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
 
+        <div class="mb-2">
+            <label class="form-label">Regista</label>
+            <a href="#" title="Aggiungi un nuovo regista" class="btn btn-danger btn-sm">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+
+            <select class="form-select" th:field="*{director}" th:errorclass="is-invalid">
+                <option value="">-- Seleziona un regista --</option>
+                <option th:each="director : ${directors}" th:value="${director.id}" th:text="${director}">
+                </option>
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('director')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('director')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-between">
+            <input type="submit" class="btn btn-primary" value="Crea" />
+            <input type="reset" class="btn btn-danger" value="Annulla" />
         </div>
     </form>
 </body>
