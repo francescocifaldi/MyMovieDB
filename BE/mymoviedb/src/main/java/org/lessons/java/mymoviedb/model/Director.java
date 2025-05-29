@@ -83,4 +83,8 @@ public class Director {
         this.movies = movies;
     }
 
+    @Override
+    public String toString() {
+        return name + " " + surname;
+    }
 }

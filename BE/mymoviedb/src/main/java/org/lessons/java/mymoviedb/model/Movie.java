@@ -1,10 +1,7 @@
 package org.lessons.java.mymoviedb.model;
 
-import java.time.LocalDate;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,7 +29,7 @@ public class Movie {
     private Integer duration;
 
     @NotBlank(message = "A movie must have a publication date")
-    private LocalDate publicationDate;
+    private Integer publicationYear;
 
     @Lob
     private String description;
@@ -70,12 +67,12 @@ public class Movie {
         this.duration = duration;
     }
 
-    public LocalDate getPublicationDate() {
-        return this.publicationDate;
+    public Integer getPublicationYear() {
+        return this.publicationYear;
     }
 
-    public void setPublicationDate(LocalDate publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setPublicationYear(Integer publicationYear) {
+        this.publicationYear = publicationYear;
     }
 
     public String getDescription() {
