@@ -22,7 +22,10 @@
                 <p>Published in: [[*{publicationYear}]]</p>
                 <p>Duration: [[*{duration}]]'</p>
                 <p>Description: [[*{description}]]</p>
-                <p>Categories: </p>
+                <p>Categories: <th:block th:each="category : *{categories}">
+                        <span>[[${category}]]</span>
+                    </th:block>
+                </p>
             </div>
         </div>
     </div>
