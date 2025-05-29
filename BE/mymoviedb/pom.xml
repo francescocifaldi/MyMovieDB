@@ -70,13 +70,6 @@
 			<artifactId>bootstrap</artifactId>
 			<version>5.3.5</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.webjars.bower/fontawesome -->
-		<dependency>
-			<groupId>org.webjars.bower</groupId>
-			<artifactId>fontawesome</artifactId>
-			<version>4.7.0</version>
-		</dependency>
 	</dependencies>
 
 	<build>

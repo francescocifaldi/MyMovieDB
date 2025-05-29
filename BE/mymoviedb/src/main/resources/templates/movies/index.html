@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.5/css/bootstrap.min.css}">
-    <link th:rel="stylesheet" th:href="@{/css/style.css}">
+    <th:block th:replace="~{fragments :: styles}"></th:block>
 </head>
+
+<th:block th:replace="~{fragments :: header}"></th:block>
 
 <body>
     <div class="container">
@@ -25,9 +26,10 @@
                         <td>[[*{duration}]]</td>
                         <td>[[*{director}]]</td>
                         <td>
+                            <a th:href="@{/movies/{id}(id=${movie.id})}" class="btn btn-sm btn-primary"><i
+                                    class="fa-solid fa-magnifying-glass"></i></a>
                             <a href="#" class="btn btn-sm btn-primary">BTN</a>
-                            <a href="#" class="btn btn-sm btn-primary">BTN</a>
-                            <a href="#" class="btn btn-sm btn-danger">BTN</a>
+                            <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                         </td>
                     </tr>
                 </th:block>

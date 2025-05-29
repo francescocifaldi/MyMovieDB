@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <th:block th:replace="~{fragments :: styles}"></th:block>
+</head>
+
+<th:block th:replace="~{fragments :: header}"></th:block>
+
+<body th:object="${movie}">
+    <div class="container">
+        <div class="mb-3">
+            <h1 class="text-center">[[*{title}]]</h1>
+        </div>
+        <div class="row">
+            <div class="col-6">image</div>
+            <div class="col-6">
+                <p><b>Directed by:</b> [[*{director}]]</p>
+                <p>Published in: [[*{publicationYear}]]</p>
+                <p>Duration: [[*{duration}]]'</p>
+                <p>Description: [[*{description}]]</p>
+                <p>Categories: </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
