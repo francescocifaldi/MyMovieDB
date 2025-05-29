@@ -12,7 +12,9 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "movies")
@@ -25,7 +27,8 @@ public class Movie {
     @NotBlank(message = "A movie must have a title")
     private String title;
 
-    @NotBlank(message = "A movie must have a duration")
+    @NotNull(message = "A movie must have a duration")
+    @Min(value = 1, message = "Duration must be at least 1 minute")
     private Integer duration;
 
     @NotBlank(message = "A movie must have a publication date")
