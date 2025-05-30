@@ -12,7 +12,8 @@
 
 <body>
     <div class="container">
-        <form id="movie-form" th:action="@{/directors/create}" method="post" th:object="${director}">
+        <form id="movie-form" th:action="${edit} ? @{/directors/{id}/edit(id=${director.id})} : @{/directors/create}"
+            method="post" th:object="${director}">
 
             <input type="hidden" th:field="*{id}" />
 
@@ -40,8 +41,8 @@
 
             <div class="mb-2">
                 <label for="dateOfBirth" class="form-label">Data di nascita:</label>
-                <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" required
-                    th:field="*{dateOfBirth}" th:errorclass="is-invalid">
+                <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" th:value="*{dateOfBirth}"
+                    required th:errorclass="is-invalid">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('dateOfBirth')}">
                     <ul>
                         <li th:each="err : ${#fields.errors('dateOfBirth')}" th:text="${err}"></li>
@@ -60,7 +61,8 @@
             </div> -->
 
             <div class="mb-3 d-flex justify-content-between">
-                <input type="submit" class="btn btn-primary" value="Crea" />
+                <input th:if="${edit}" type="submit" class="btn btn-primary" value="Modifica" />
+                <input th:unless="${edit}" type="submit" class="btn btn-primary" value="Crea" />
                 <input type="reset" class="btn btn-danger" value="Annulla" />
             </div>
         </form>

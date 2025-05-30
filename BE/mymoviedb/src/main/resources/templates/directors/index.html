@@ -9,6 +9,7 @@
 </head>
 
 <th:block th:replace="~{fragments :: header}"></th:block>
+<th:block th:replace="~{fragments :: backButton}"></th:block>
 
 <body>
     <div class="container">
@@ -30,7 +31,8 @@
                         <td>
                             <a th:href="@{/directors/{id}(id=${director.id})}" class="btn btn-sm btn-primary"><i
                                     class="fa-solid fa-magnifying-glass"></i></a>
-                            <a href="#" class="btn btn-sm btn-primary">BTN</a>
+                            <a th:href="@{/directors/{id}/edit(id=${director.id})}" class="btn btn-sm btn-primary"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
                             <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                         </td>
                     </tr>

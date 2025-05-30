@@ -53,4 +53,25 @@ public class DirectorController {
         return "redirect:/directors";
     }
 
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Integer id, Model model) {
+        model.addAttribute("director", directorService.getById(id));
+        model.addAttribute("edit", true);
+        return "directors/create-or-edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String edit(@PathVariable Integer id, @Valid @ModelAttribute("director") Director director,
+            BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("edit", true);
+            return "directors/create-or-edit";
+        }
+
+        director.setId(id);
+        directorService.create(director);
+        return "redirect:/directors";
+    }
+
 }

@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/movies")
@@ -65,4 +64,32 @@ public class MovieController {
         return "redirect:/movies";
     }
 
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Integer id, Model model) {
+        Movie movie = movieService.getById(id);
+        model.addAttribute("movie", movie);
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("directors", directorService.findAll());
+        model.addAttribute("edit", true);
+        return "movies/create-or-edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String update(
+            @PathVariable Integer id,
+            @Valid @ModelAttribute("movie") Movie movie,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("directors", directorService.findAll());
+            model.addAttribute("edit", true);
+            return "movies/create-or-edit";
+        }
+
+        movie.setId(id);
+        movieService.create(movie);
+        return "redirect:/movies";
+    }
 }

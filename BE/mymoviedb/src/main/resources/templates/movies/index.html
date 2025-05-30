@@ -9,6 +9,7 @@
 </head>
 
 <th:block th:replace="~{fragments :: header}"></th:block>
+<th:block th:replace="~{fragments :: backButton}"></th:block>
 
 <body>
     <div class="container">
@@ -26,15 +27,22 @@
             <tbody>
                 <th:block th:each="movie : ${movies}" th:object="${movie}">
                     <tr>
-                        <td>[[*{title}]]</td>
+                        <td><a th:href="@{/movies/{id}(id=${movie.id})}"
+                                class="text-body link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-body-emphasis">[[*{title}]]</a>
+                        </td>
                         <td>[[*{publicationYear}]]</td>
                         <td>[[*{duration}]]</td>
-                        <td>[[*{director}]]</td>
+                        <td><a th:href="@{/directors/{id}(id=${movie.director.id})}"
+                                class="text-body link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-body-emphasis">[[*{director}]]</a>
+                        </td>
                         <td>
-                            <a th:href="@{/movies/{id}(id=${movie.id})}" class="btn btn-sm btn-primary"><i
-                                    class="fa-solid fa-magnifying-glass"></i></a>
-                            <a href="#" class="btn btn-sm btn-primary">BTN</a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                            <a th:href="@{/movies/{id}/edit(id=${movie.id})}" class="btn btn-sm btn-primary"
+                                title="Modifica">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-danger" title="Elimina">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
                         </td>
                     </tr>
                 </th:block>

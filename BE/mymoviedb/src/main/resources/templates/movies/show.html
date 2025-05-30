@@ -9,6 +9,7 @@
 </head>
 
 <th:block th:replace="~{fragments :: header}"></th:block>
+<th:block th:replace="~{fragments :: backButton}"></th:block>
 
 <body th:object="${movie}">
     <div class="container">
@@ -23,7 +24,7 @@
                 <p>Duration: [[*{duration}]]'</p>
                 <p>Description: [[*{description}]]</p>
                 <p>Categories: <th:block th:each="category : *{categories}">
-                        <span>[[${category}]]</span>
+                        <span class="badge text-bg-secondary">[[${category.name}]]</span>
                     </th:block>
                 </p>
             </div>
