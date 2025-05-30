@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <th:block th:replace="~{fragments :: styles}"></th:block>
+</head>
+
+<th:block th:replace="~{fragments :: header}"></th:block>
+
+<body>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <th>Surname</th>
+                <th>Name</th>
+
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <th:block th:each="director : ${directors}" th:object="${director}">
+                    <tr>
+                        <td>[[*{surname}]]</td>
+                        <td>[[*{name}]]</td>
+                        <td>
+                            <a th:href="@{/directors/{id}(id=${director.id})}" class="btn btn-sm btn-primary"><i
+                                    class="fa-solid fa-magnifying-glass"></i></a>
+                            <a href="#" class="btn btn-sm btn-primary">BTN</a>
+                            <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                        </td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
