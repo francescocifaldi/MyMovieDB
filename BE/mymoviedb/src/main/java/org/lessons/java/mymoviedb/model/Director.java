@@ -11,6 +11,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "directors")
@@ -26,7 +27,7 @@ public class Director {
     @NotBlank(message = "A director must have a surname")
     private String surname;
 
-    @NotBlank(message = "A director must have a date of birth")
+    @NotNull(message = "A director must have a date of birth")
     private LocalDate dateOfBirth;
 
     @Lob

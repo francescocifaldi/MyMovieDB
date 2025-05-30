@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -18,6 +19,12 @@ public class DirectorController {
     public String index(Model model) {
         model.addAttribute("directors", directorService.findAll());
         return "directors/index";
+    }
+
+    @GetMapping("/{id}")
+    public String show(@PathVariable Integer id, Model model) {
+        model.addAttribute("director", directorService.getById(id));
+        return "directors/show";
     }
 
 }

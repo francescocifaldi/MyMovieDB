@@ -1,6 +1,8 @@
 package org.lessons.java.mymoviedb.model;
 
 import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,7 +43,7 @@ public class Movie {
     @ManyToMany
     @JoinTable(name = "category_movie", joinColumns = @JoinColumn(name = "film_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     @Size(min = 1, message = "A movie must have at least one category")
-    private List<Category> categories;
+    private Set<Category> categories;
 
     @ManyToOne
     @JoinColumn(name = "director_id", nullable = false)
@@ -89,11 +91,11 @@ public class Movie {
         this.description = description;
     }
 
-    public List<Category> getCategories() {
+    public Set<Category> getCategories() {
         return this.categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
 

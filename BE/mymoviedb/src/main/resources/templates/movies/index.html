@@ -12,9 +12,13 @@
 
 <body>
     <div class="container">
+        <a th:href="@{/movies/create}" class="btn btn-outline-primary w-100 mb-2">Aggiungi Film</a>
+    </div>
+    <div class="container">
         <table class="table">
             <thead>
                 <th>Title</th>
+                <th>Year</th>
                 <th>Duration</th>
                 <th>Director</th>
                 <th>Actions</th>
@@ -23,6 +27,7 @@
                 <th:block th:each="movie : ${movies}" th:object="${movie}">
                     <tr>
                         <td>[[*{title}]]</td>
+                        <td>[[*{publicationYear}]]</td>
                         <td>[[*{duration}]]</td>
                         <td>[[*{director}]]</td>
                         <td>

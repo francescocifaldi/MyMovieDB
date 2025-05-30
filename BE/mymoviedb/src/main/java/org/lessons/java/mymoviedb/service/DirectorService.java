@@ -15,4 +15,8 @@ public class DirectorService {
     public List<Director> findAll() {
         return directorRepository.findAll();
     }
+
+    public Director getById(Integer id) {
+        return directorRepository.findById(id).get();
+    }
 }

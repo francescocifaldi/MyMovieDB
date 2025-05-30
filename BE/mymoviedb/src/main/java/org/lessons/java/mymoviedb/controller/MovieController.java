@@ -35,7 +35,7 @@ public class MovieController {
         return "movies/index";
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
         model.addAttribute("movie", movieService.getById(id));
         return "movies/show";
@@ -57,6 +57,7 @@ public class MovieController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("directors", directorService.findAll());
             return "movies/create-or-edit";
         }
 

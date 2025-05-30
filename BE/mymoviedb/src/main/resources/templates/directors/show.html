@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <th:block th:replace="~{fragments :: styles}"></th:block>
+</head>
+
+<th:block th:replace="~{fragments :: header}"></th:block>
+
+<body th:object="${director}">
+    <div class="container">
+        <div class="mb-3">
+            <h1 class="text-center">[[${director}]]</h1>
+        </div>
+        <div class="row">
+            <div class="col-6">image</div>
+            <div class="col-6">
+                <p><b>Surname:</b> [[*{surname}]]</p>
+                <p>Name: [[*{name}]]</p>
+                <p>Date of birth: [[*{dateOfBirth}]]</p>
+                <p>Description: [[*{career}]]</p>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
