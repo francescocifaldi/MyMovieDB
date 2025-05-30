@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <th:block th:replace="~{fragments :: styles}"></th:block>
+</head>
+
+<th:block th:replace="~{fragments :: header}"></th:block>
+
+<body>
+    <div class="container">
+        <form id="movie-form" th:action="@{/directors/create}" method="post" th:object="${director}">
+
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="mb-2">
+                <label for="surname" class="form-label">Cognome</label>
+                <input type="text" id="surname" name="surname" class="form-control" required th:field="*{surname}"
+                    th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('surname')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('surname')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-2">
+                <label for="name" class="form-label">Nome:</label>
+                <input type="text" id="name" name="name" class="form-control" required th:field="*{name}"
+                    th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-2">
+                <label for="dateOfBirth" class="form-label">Data di nascita:</label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" required
+                    th:field="*{dateOfBirth}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('dateOfBirth')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('dateOfBirth')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-2">
+                <label for="career" class="form-label">Descrizione</label>
+                <textarea id="career" name="career" class="form-control" th:field="*{career}"></textarea>
+            </div>
+
+            <!--             <div class="mb-3">
+                <label for="image" class="form-label">Copertina</label>
+                <input class="form-control" type="file" id="image" name="image" accept="image/*">
+            </div> -->
+
+            <div class="mb-3 d-flex justify-content-between">
+                <input type="submit" class="btn btn-primary" value="Crea" />
+                <input type="reset" class="btn btn-danger" value="Annulla" />
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

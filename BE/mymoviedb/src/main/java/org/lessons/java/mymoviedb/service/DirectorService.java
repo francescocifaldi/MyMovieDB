@@ -19,4 +19,8 @@ public class DirectorService {
     public Director getById(Integer id) {
         return directorRepository.findById(id).get();
     }
+
+    public Director create(Director director) {
+        return directorRepository.save(director);
+    }
 }
