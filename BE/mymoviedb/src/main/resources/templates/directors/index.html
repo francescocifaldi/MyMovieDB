@@ -33,13 +33,41 @@
                         <td class="text-end">
                             <a th:href="@{/directors/{id}/edit(id=${director.id})}" class="btn btn-sm btn-primary"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                th:data-bs-target="'#modal'+${director.id}" title="Elimina">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
                         </td>
                     </tr>
+
+                    <!-- Modal -->
+                    <div class="modal fade" th:id="'modal'+${director.id}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Elimino regista [[${director}]]</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Sei sicuro?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Annulla</button>
+                                    <form th:action="@{/directors/{id}/delete(id=${director.id})}" method="post">
+                                        <button type="submit" class="btn btn-danger">
+                                            Elimina
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </th:block>
             </tbody>
         </table>
     </div>
+    <th:block th:replace="~{fragments :: scripts}"></th:block>
 </body>
 
 </html>

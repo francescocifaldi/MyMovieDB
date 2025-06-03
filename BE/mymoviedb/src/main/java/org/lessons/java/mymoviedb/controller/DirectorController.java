@@ -74,4 +74,9 @@ public class DirectorController {
         return "redirect:/directors";
     }
 
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Integer id) {
+        directorService.deleteById(id);
+        return "redirect:/directors";
+    }
 }

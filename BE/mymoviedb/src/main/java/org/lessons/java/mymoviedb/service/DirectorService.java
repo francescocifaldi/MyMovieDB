@@ -23,4 +23,8 @@ public class DirectorService {
     public Director create(Director director) {
         return directorRepository.save(director);
     }
+
+    public void deleteById(Integer id) {
+        directorRepository.deleteById(id);
+    }
 }
