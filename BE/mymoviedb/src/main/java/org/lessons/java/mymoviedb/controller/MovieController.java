@@ -92,4 +92,14 @@ public class MovieController {
         movieService.create(movie);
         return "redirect:/movies";
     }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Integer id) {
+        Movie movie = movieService.getById(id);
+        if (movie != null) {
+            movieService.deleteById(id);
+        }
+        return "redirect:/movies";
+    }
+
 }
