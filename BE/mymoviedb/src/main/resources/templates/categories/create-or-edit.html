@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <th:block th:replace="~{fragments :: styles}"></th:block>
+</head>
+
+<th:block th:replace="~{fragments :: header}"></th:block>
+
+<body>
+    <div class="container">
+        <form id="category-form"
+            th:action="${edit} ? @{/categories/{id}/edit(id=${category.id})} : @{/categories/create}" method="post"
+            th:object="${category}">
+
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="mb-2">
+                <label for="name" class="form-label">Nome</label>
+                <input type="text" id="name" name="name" class="form-control" required th:field="*{name}"
+                    th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-3 d-flex justify-content-between">
+                <input th:if="${edit}" type="submit" class="btn btn-primary" value="Modifica" />
+                <input th:unless="${edit}" type="submit" class="btn btn-primary" value="Crea" />
+                <input type="reset" class="btn btn-danger" value="Annulla" />
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

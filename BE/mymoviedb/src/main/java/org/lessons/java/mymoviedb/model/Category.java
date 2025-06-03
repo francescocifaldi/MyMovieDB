@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Category {
     private Integer id;
 
     @NotBlank(message = "A category must have a name")
+    @Column(unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "categories")

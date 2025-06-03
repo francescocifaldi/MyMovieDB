@@ -23,4 +23,12 @@ public class CategoryService {
     public void deleteById(Integer id) {
         categoryRepository.deleteById(id);
     }
+
+    public Category create(Category category) {
+        return categoryRepository.save(category);
+    }
+
+    public boolean categoryExists(String name) {
+        return categoryRepository.existsByNameIgnoreCase(name);
+    }
 }

@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <form id="movie-form" th:action="${edit} ? @{/directors/{id}/edit(id=${director.id})} : @{/directors/create}"
+        <form id="director-form" th:action="${edit} ? @{/directors/{id}/edit(id=${director.id})} : @{/directors/create}"
             method="post" th:object="${director}">
 
             <input type="hidden" th:field="*{id}" />
