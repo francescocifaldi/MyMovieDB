@@ -13,25 +13,22 @@
 <body>
     <div class="container d-flex justify-content-between align-items-center">
         <th:block th:replace="~{fragments :: backButton}"></th:block>
-        <a th:href="@{/directors/create}" class="btn btn-primary">Aggiungi Regista</a>
+        <a th:href="@{#}" class="btn btn-primary">Aggiungi categoria</a>
     </div>
     <div class="container">
         <table class="table">
             <thead>
-                <th>Full Name</th>
-                <th>Date of Birth</th>
+                <th>Name</th>
                 <th class="text-end">Actions</th>
             </thead>
             <tbody>
-                <th:block th:each="director : ${directors}" th:object="${director}">
+                <th:block th:each="category : ${categories}" th:object="${category}">
                     <tr>
-                        <td><a th:href="@{/directors/{id}(id=${director.id})}"
-                                class="text-body link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-body-emphasis">[[*{surname}]]
-                                [[*{name}]]</a>
+                        <td><a th:href="@{/categories/{id}(id=${category.id})}"
+                                class="text-body link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-body-emphasis">[[*{name}]]</a>
                         </td>
-                        <td>[[*{dateOfBirth}]]</td>
                         <td class="text-end">
-                            <a th:href="@{/directors/{id}/edit(id=${director.id})}" class="btn btn-sm btn-primary"><i
+                            <a th:href="@{/categories/{id}/edit(id=${category.id})}" class="btn btn-sm btn-primary"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
                             <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                         </td>

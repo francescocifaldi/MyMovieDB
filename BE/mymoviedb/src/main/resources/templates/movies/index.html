@@ -9,11 +9,12 @@
 </head>
 
 <th:block th:replace="~{fragments :: header}"></th:block>
-<th:block th:replace="~{fragments :: backButton}"></th:block>
+
 
 <body>
-    <div class="container">
-        <a th:href="@{/movies/create}" class="btn btn-outline-primary w-100 mb-2">Aggiungi Film</a>
+    <div class="container d-flex justify-content-between align-items-center">
+        <th:block th:replace="~{fragments :: backButton}"></th:block>
+        <a th:href="@{/movies/create}" class="btn btn-primary">Aggiungi Film</a>
     </div>
     <div class="container">
         <table class="table">
@@ -22,7 +23,7 @@
                 <th>Year</th>
                 <th>Duration</th>
                 <th>Director</th>
-                <th>Actions</th>
+                <th class="text-end">Actions</th>
             </thead>
             <tbody>
                 <th:block th:each="movie : ${movies}" th:object="${movie}">
@@ -35,7 +36,7 @@
                         <td><a th:href="@{/directors/{id}(id=${movie.director.id})}"
                                 class="text-body link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-body-emphasis">[[*{director}]]</a>
                         </td>
-                        <td>
+                        <td class="text-end">
                             <a th:href="@{/movies/{id}/edit(id=${movie.id})}" class="btn btn-sm btn-primary"
                                 title="Modifica">
                                 <i class="fa-solid fa-pen-to-square"></i>

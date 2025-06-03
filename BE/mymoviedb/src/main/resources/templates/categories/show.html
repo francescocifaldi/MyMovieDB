@@ -10,21 +10,15 @@
 
 <th:block th:replace="~{fragments :: header}"></th:block>
 
-<body th:object="${director}">
+<body th:object="${category}">
     <div class="container">
-        <div class="mb-3 d-flex justify-content-between align-items-center">
-            <th:block th:replace="~{fragments :: backButton}"></th:block>
-            <h1 class="text-center">[[${director}]]</h1>
-            <div></div>
+        <div class="mb-3">
+            <h1 class="text-center">[[${category.name}]]</h1>
         </div>
         <div class="row">
             <div class="col-6">image</div>
             <div class="col-6">
-                <p><b>Surname:</b> [[*{surname}]]</p>
-                <p>Name: [[*{name}]]</p>
-                <p>Date of birth: [[*{dateOfBirth}]]</p>
-                <p>Description: [[*{career}]]</p>
-
+                <p><b>Name:</b> [[*{name}]]</p>
             </div>
         </div>
     </div>

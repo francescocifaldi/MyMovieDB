@@ -1,8 +1,6 @@
 package org.lessons.java.mymoviedb.model;
 
-import java.util.List;
 import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
