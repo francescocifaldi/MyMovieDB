@@ -24,6 +24,10 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
+    public Movie update(Movie movie) {
+        return movieRepository.save(movie);
+    }
+
     public void deleteById(Integer id) {
         movieRepository.deleteById(id);
     }

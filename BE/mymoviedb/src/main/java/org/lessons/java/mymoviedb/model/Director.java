@@ -30,6 +30,8 @@ public class Director {
     @NotNull(message = "A director must have a date of birth")
     private LocalDate dateOfBirth;
 
+    private String photo;
+
     @Lob
     private String career;
 
@@ -82,6 +84,14 @@ public class Director {
 
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
+    }
+
+    public String getPhoto() {
+        return this.photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     @Override

@@ -1,16 +1,10 @@
 package org.lessons.java.mymoviedb.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Optional;
-import java.util.UUID;
-
 import org.lessons.java.mymoviedb.model.Movie;
 import org.lessons.java.mymoviedb.service.CategoryService;
 import org.lessons.java.mymoviedb.service.DirectorService;
+import org.lessons.java.mymoviedb.service.FileUploadService;
 import org.lessons.java.mymoviedb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/movies")
@@ -38,6 +30,9 @@ public class MovieController {
 
     @Autowired
     private DirectorService directorService;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     @GetMapping
     public String index(Model model) {
@@ -72,16 +67,20 @@ public class MovieController {
             return "movies/create-or-edit";
         }
 
+        Movie savedMovie = movieService.create(movie);
+
         if (!imageFile.isEmpty()) {
             try {
-                String fileName = saveImageToFileSystem(imageFile, movie.getTitle());
-                movie.setCoverImage(fileName);
+                String fileName = fileUploadService.saveImage(imageFile,
+                        savedMovie.getId() + "_" + savedMovie.getTitle(), "movies");
+                savedMovie.setCoverImage(fileName);
+                movieService.update(savedMovie);
             } catch (IOException e) {
                 e.printStackTrace();
+
             }
         }
 
-        movieService.create(movie);
         return "redirect:/movies";
     }
 
@@ -98,7 +97,7 @@ public class MovieController {
     @PostMapping("/{id}/edit")
     public String update(
             @Valid @ModelAttribute("movie") Movie movie,
-            BindingResult bindingResult,
+            BindingResult bindingResult, @PathVariable Integer id,
             @RequestParam("imageFile") MultipartFile imageFile,
             Model model) {
 
@@ -110,15 +109,17 @@ public class MovieController {
 
         if (!imageFile.isEmpty()) {
             try {
-                String fileName = saveImageToFileSystem(imageFile, movie.getTitle());
+                String fileName = fileUploadService.saveImage(imageFile, movie.getId() + "_" + movie.getTitle(),
+                        "movies");
                 movie.setCoverImage(fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
+        movie.setId(id);
         movieService.create(movie);
-        return "redirect:/movies";
+        return "redirect:/movies/" + movie.getId();
     }
 
     @PostMapping("/{id}/delete")
@@ -129,27 +130,4 @@ public class MovieController {
         }
         return "redirect:/movies";
     }
-
-    private String saveImageToFileSystem(MultipartFile imageFile, String title) throws IOException {
-        String extension = Optional.ofNullable(imageFile.getOriginalFilename())
-                .filter(f -> f.contains("."))
-                .map(f -> f.substring(imageFile.getOriginalFilename().lastIndexOf(".")))
-                .orElse("");
-
-        String fileName = title + extension;
-
-        // Percorso relativo al progetto (dentro static/uploads)
-        Path uploadDir = Paths.get("be/mymoviedb/src/main/resources/static/uploads");
-
-        // Crea la cartella se non esiste
-        if (!Files.exists(uploadDir)) {
-            Files.createDirectories(uploadDir);
-        }
-
-        Path filePath = uploadDir.resolve(fileName);
-        Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        return fileName;
-    }
-
 }

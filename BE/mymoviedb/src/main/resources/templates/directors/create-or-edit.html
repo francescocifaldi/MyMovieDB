@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <form id="director-form" th:action="${edit} ? @{/directors/{id}/edit(id=${director.id})} : @{/directors/create}"
-            method="post" th:object="${director}">
+            enctype="multipart/form-data" method="post" th:object="${director}">
 
             <input type="hidden" th:field="*{id}" />
 
@@ -55,10 +55,10 @@
                 <textarea id="career" name="career" class="form-control" th:field="*{career}"></textarea>
             </div>
 
-            <!--             <div class="mb-3">
-                <label for="image" class="form-label">Copertina</label>
-                <input class="form-control" type="file" id="image" name="image" accept="image/*">
-            </div> -->
+            <div class="mb-3">
+                <label for="imageFile" class="form-label">Foto</label>
+                <input class="form-control" type="file" id="imageFile" name="imageFile" accept="image/*">
+            </div>
 
             <div class="mb-3 d-flex justify-content-between">
                 <input th:if="${edit}" type="submit" class="btn btn-primary" value="Modifica" />
