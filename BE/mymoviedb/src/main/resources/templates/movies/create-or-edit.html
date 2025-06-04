@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <form id="movie-form" th:action="${edit} ? @{/movies/{id}/edit(id=${movie.id})} : @{/movies/create}"
-            method="post" th:object="${movie}">
+            method="post" th:object="${movie}" enctype="multipart/form-data">
 
             <input type="hidden" th:field="*{id}" />
 
@@ -55,10 +55,10 @@
                 <textarea id="description" name="description" class="form-control" th:field="*{description}"></textarea>
             </div>
 
-            <!--             <div class="mb-3">
-                <label for="image" class="form-label">Copertina</label>
-                <input class="form-control" type="file" id="image" name="image" accept="image/*">
-            </div> -->
+            <div class="mb-3">
+                <label for="imageFile" class="form-label">Copertina</label>
+                <input class="form-control" type="file" id="imageFile" name="imageFile" accept="image/*">
+            </div>
 
             <div class="mb-2">
                 <label class="form-label">Categorie</label>

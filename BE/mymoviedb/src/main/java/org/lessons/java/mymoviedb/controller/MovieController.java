@@ -1,5 +1,13 @@
 package org.lessons.java.mymoviedb.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Optional;
+import java.util.UUID;
+
 import org.lessons.java.mymoviedb.model.Movie;
 import org.lessons.java.mymoviedb.service.CategoryService;
 import org.lessons.java.mymoviedb.service.DirectorService;
@@ -13,6 +21,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -52,12 +63,22 @@ public class MovieController {
     public String store(
             @Valid @ModelAttribute("movie") Movie movie,
             BindingResult bindingResult,
+            @RequestParam("imageFile") MultipartFile imageFile,
             Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
             model.addAttribute("directors", directorService.findAll());
             return "movies/create-or-edit";
+        }
+
+        if (!imageFile.isEmpty()) {
+            try {
+                String fileName = saveImageToFileSystem(imageFile, movie.getTitle());
+                movie.setCoverImage(fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         movieService.create(movie);
@@ -76,19 +97,26 @@ public class MovieController {
 
     @PostMapping("/{id}/edit")
     public String update(
-            @PathVariable Integer id,
             @Valid @ModelAttribute("movie") Movie movie,
             BindingResult bindingResult,
+            @RequestParam("imageFile") MultipartFile imageFile,
             Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
             model.addAttribute("directors", directorService.findAll());
-            model.addAttribute("edit", true);
             return "movies/create-or-edit";
         }
 
-        movie.setId(id);
+        if (!imageFile.isEmpty()) {
+            try {
+                String fileName = saveImageToFileSystem(imageFile, movie.getTitle());
+                movie.setCoverImage(fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         movieService.create(movie);
         return "redirect:/movies";
     }
@@ -100,6 +128,28 @@ public class MovieController {
             movieService.deleteById(id);
         }
         return "redirect:/movies";
+    }
+
+    private String saveImageToFileSystem(MultipartFile imageFile, String title) throws IOException {
+        String extension = Optional.ofNullable(imageFile.getOriginalFilename())
+                .filter(f -> f.contains("."))
+                .map(f -> f.substring(imageFile.getOriginalFilename().lastIndexOf(".")))
+                .orElse("");
+
+        String fileName = title + extension;
+
+        // Percorso relativo al progetto (dentro static/uploads)
+        Path uploadDir = Paths.get("be/mymoviedb/src/main/resources/static/uploads");
+
+        // Crea la cartella se non esiste
+        if (!Files.exists(uploadDir)) {
+            Files.createDirectories(uploadDir);
+        }
+
+        Path filePath = uploadDir.resolve(fileName);
+        Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        return fileName;
     }
 
 }

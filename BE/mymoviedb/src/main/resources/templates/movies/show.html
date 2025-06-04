@@ -25,7 +25,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">image</div>
+            <div class="col-6"><img th:src="@{'/uploads/' + ${movie.coverImage}}" alt="Copertina" class="img-fluid" />
+            </div>
             <div class="col-6">
                 <p><b>Directed by:</b> [[*{director}]]</p>
                 <p>Published in: [[*{publicationYear}]]</p>

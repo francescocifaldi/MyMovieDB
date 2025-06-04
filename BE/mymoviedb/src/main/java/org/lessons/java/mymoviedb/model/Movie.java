@@ -28,6 +28,8 @@ public class Movie {
     @NotBlank(message = "A movie must have a title")
     private String title;
 
+    private String coverImage;
+
     @NotNull(message = "A movie must have a duration")
     @Min(value = 1, message = "Duration must be at least 1 minute")
     private Integer duration;
@@ -103,6 +105,14 @@ public class Movie {
 
     public void setDirector(Director director) {
         this.director = director;
+    }
+
+    public String getCoverImage() {
+        return this.coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
     }
 
 }
