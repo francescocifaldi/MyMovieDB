@@ -1,12 +1,15 @@
 package org.lessons.java.mymoviedb.controller;
 
 import java.io.IOException;
+import org.springframework.data.domain.Page;
 import org.lessons.java.mymoviedb.model.Movie;
 import org.lessons.java.mymoviedb.service.CategoryService;
 import org.lessons.java.mymoviedb.service.DirectorService;
 import org.lessons.java.mymoviedb.service.FileUploadService;
 import org.lessons.java.mymoviedb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,8 +38,16 @@ public class MovieController {
     private FileUploadService fileUploadService;
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("movies", movieService.findAll());
+    public String index(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Model model) {
+
+        Page<Movie> moviesPage = movieService.findAll(PageRequest.of(page, size, Sort.by("title").ascending()));
+        model.addAttribute("moviesPage", moviesPage);
+        model.addAttribute("movies", moviesPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", moviesPage.getTotalPages());
         return "movies/index";
     }
 
