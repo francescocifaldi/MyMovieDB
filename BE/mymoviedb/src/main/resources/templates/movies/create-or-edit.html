@@ -62,7 +62,7 @@
 
             <div class="mb-2">
                 <label class="form-label">Categorie</label>
-                <a href="#" title="Aggiungi una nuova categoria" class="btn btn-danger btn-sm">
+                <a th:href="@{/categories/create}" class="btn btn-primary btn-sm">
                     <i class="fa-solid fa-plus"></i>
                 </a>
 
@@ -80,10 +80,7 @@
 
             <div class="mb-2">
                 <label class="form-label">Regista</label>
-                <a href="#" title="Aggiungi un nuovo regista" class="btn btn-danger btn-sm">
-                    <i class="fa-solid fa-plus"></i>
-                </a>
-
+                <a th:href="@{/directors/create}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i></a>
                 <select class="form-select" th:field="*{director}" th:errorclass="is-invalid">
                     <option value="">-- Seleziona un regista --</option>
                     <option th:each="director : ${directors}" th:value="${director.id}" th:text="${director}">

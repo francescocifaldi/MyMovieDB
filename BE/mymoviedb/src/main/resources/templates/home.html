@@ -14,28 +14,47 @@
     <div class="container mt-4">
         <div class="row text-center">
             <div class="col-4">
-                <a th:href="@{/movies}" class="text-decoration-none text-body">
-                    <div class="border border-secondary rounded p-4">
+
+                <div class="border border-secondary rounded p-4">
+                    <a th:href="@{/movies}" class="text-decoration-none text-body">
                         <i class="fa-solid fa-film fa-8x mb-2"></i>
                         <div>Vai all'elenco dei film</div>
-                    </div>
-                </a>
+                    </a>
+                </div>
+                <div>
+                    <a th:href="@{/movies/create}" class="btn btn-primary mt-3 w-100">Aggiungi film</a>
+                </div>
             </div>
             <div class="col-4">
-                <a th:href="@{/directors}" class="text-decoration-none text-body">
-                    <div class="border border-secondary rounded p-4">
-                        <i class="fa-solid fa-clapperboard fa-8x mb-2"></i>
-                        <div>Vai all'elenco di registi</div>
-                    </div>
-                </a>
+
+                <div class="border border-secondary rounded p-4">
+                    <a th:href="@{/directors}" class="text-decoration-none text-body">
+                        <div>
+                            <a th:href="@{/directors}" class="text-decoration-none text-body">
+                                <i class="fa-solid fa-clapperboard fa-8x mb-2"></i>
+                                <div>Vai all'elenco di registi</div>
+                            </a>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a th:href="@{/directors/create}" class="btn btn-primary mt-3 w-100">Aggiungi regista</a>
+                </div>
             </div>
             <div class="col-4">
-                <a th:href="@{/categories}" class="text-decoration-none text-body">
-                    <div class="border border-secondary rounded p-4">
-                        <i class="fa-solid fa-tags fa-8x mb-2"></i>
-                        <div>Vai all'elenco delle categorie</div>
-                    </div>
-                </a>
+
+                <div class="border border-secondary rounded p-4">
+                    <a th:href="@{/categories}" class="text-decoration-none text-body">
+                        <div>
+                            <i class="fa-solid fa-tags fa-8x mb-2"></i>
+                            <div>Vai all'elenco delle categorie</div>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a th:href="@{/categories/create}" class="btn btn-primary mt-3 w-100">Aggiungi categoria</a>
+                </div>
+
             </div>
         </div>
     </div>
