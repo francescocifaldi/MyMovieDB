@@ -23,6 +23,12 @@ public class MovieService {
         return movieRepository.findAll(pageable);
     }
 
+    public List<Movie> search(String query) {
+        return movieRepository
+                .findDistinctByTitleContainingIgnoreCaseOrDirector_NameContainingIgnoreCaseOrDirector_surnameContainingIgnoreCaseOrCategories_NameContainingIgnoreCase(
+                        query, query, query, query);
+    }
+
     public Movie getById(Integer id) {
         return movieRepository.findById(id).get();
     }

@@ -10,13 +10,25 @@
 <body>
 
     <th:block th:fragment="header">
-        <header class="mb-3 p-2">
+        <header class="p-3">
             <div class="container d-flex justify-content-between align-items-center">
+
                 <a th:href="@{/}"><i class="fa-solid fa-house fa-2x"></i></a>
+
+                <form th:action="@{/movies/search}" method="get">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Cerca ..." required>
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+
                 <div>
                     <span class="border rounded p-2"><i class="fa-solid fa-user"></i> user</span>
-                    <span class="border rounded p-2"><i class="fa-solid fa-crown"></i>role</span>
+                    <span class="border rounded p-2"><i class="fa-solid fa-crown"></i> role</span>
                 </div>
+
             </div>
         </header>
     </th:block>
