@@ -54,10 +54,18 @@ public class MovieController {
     }
 
     @GetMapping("/search")
-    public String searchMovies(@RequestParam("q") String query, Model model) {
-        List<Movie> movies = movieService.search(query);
-        model.addAttribute("movies", movies);
+    public String searchMovies(
+            @RequestParam("q") String query,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Model model) {
+
+        Page<Movie> moviesPage = movieService.search(query, PageRequest.of(page, size, Sort.by("title").ascending()));
+        model.addAttribute("moviesPage", moviesPage);
+        model.addAttribute("movies", moviesPage.getContent());
         model.addAttribute("query", query);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", moviesPage.getTotalPages());
         return "movies/index";
     }
 

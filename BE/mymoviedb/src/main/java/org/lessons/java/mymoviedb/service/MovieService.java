@@ -23,10 +23,10 @@ public class MovieService {
         return movieRepository.findAll(pageable);
     }
 
-    public List<Movie> search(String query) {
+    public Page<Movie> search(String query, Pageable pageable) {
         return movieRepository
                 .findDistinctByTitleContainingIgnoreCaseOrDirector_NameContainingIgnoreCaseOrDirector_surnameContainingIgnoreCaseOrCategories_NameContainingIgnoreCase(
-                        query, query, query, query);
+                        query, query, query, query, pageable);
     }
 
     public Movie getById(Integer id) {

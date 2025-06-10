@@ -5,6 +5,8 @@ import java.util.List;
 import org.lessons.java.mymoviedb.model.Director;
 import org.lessons.java.mymoviedb.repository.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +16,10 @@ public class DirectorService {
 
     public List<Director> findAll() {
         return directorRepository.findAll();
+    }
+
+    public Page<Director> findAll(Pageable pageable) {
+        return directorRepository.findAll(pageable);
     }
 
     public Director getById(Integer id) {

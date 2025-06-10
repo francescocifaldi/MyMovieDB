@@ -5,6 +5,9 @@ import org.lessons.java.mymoviedb.model.Director;
 import org.lessons.java.mymoviedb.service.DirectorService;
 import org.lessons.java.mymoviedb.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,9 +29,18 @@ public class DirectorController {
     @Autowired
     private FileUploadService fileUploadService;
 
-    @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("directors", directorService.findAll());
+    @GetMapping
+    public String index(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Model model) {
+
+        Page<Director> directorsPage = directorService
+                .findAll(PageRequest.of(page, size, Sort.by("surname").ascending()));
+        model.addAttribute("directorsPage", directorsPage);
+        model.addAttribute("directors", directorsPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", directorsPage.getTotalPages());
         return "directors/index";
     }
 
