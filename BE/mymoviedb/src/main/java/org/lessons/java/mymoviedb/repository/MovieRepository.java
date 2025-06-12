@@ -1,6 +1,5 @@
 package org.lessons.java.mymoviedb.repository;
 
-import java.util.List;
 import org.lessons.java.mymoviedb.model.Movie;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

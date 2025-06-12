@@ -28,8 +28,8 @@
                 <th:block th:each="director : ${directors}" th:object="${director}">
                     <tr>
                         <td><a th:href="@{/directors/{id}(id=${director.id})}"
-                                class="text-body link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-body-emphasis">[[*{surname}]]
-                                [[*{name}]]</a>
+                                class="text-body link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-body-emphasis">
+                                [[*{name}]] [[*{surname}]]</a>
                         </td>
                         <td>[[*{dateOfBirth}]]</td>
                         <td class="text-end">
