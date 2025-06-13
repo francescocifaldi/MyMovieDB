@@ -27,11 +27,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6"><img th:src="@{'/uploads/movies/' + ${movie.coverImage}}" alt="Copertina"
-                    class="img-fluid" />
+            <div class="col-6">
+                <img th:src="${movie.coverImage} ? @{'/uploads/movies/' + ${movie.coverImage}} : '/movie_placeholder.png'"
+                    alt="Copertina" class="img-fluid" />
             </div>
             <div class="col-6">
-                <p><b>Directed by:</b> [[*{director}]]</p>
+                <p><b>Directed by:</b> <a th:href="@{/directors/{id}(id=${movie.director.id})}"
+                        class="text-body link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-body-emphasis">[[*{director}]]</a>
+                </p>
                 <p>Published in: [[*{publicationYear}]]</p>
                 <p>Duration: [[*{duration}]]'</p>
                 <p>Description: [[*{description}]]</p>

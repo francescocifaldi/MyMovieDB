@@ -27,8 +27,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6"><img th:src="@{'/uploads/directors/' + ${director.photo}}" alt="Foto"
-                    class="img-fluid" /></div>
+            <div class="col-6">
+                <img th:src="${director.photo} ? @{'/uploads/directors/' + ${director.photo}} : '/director_placeholder.png'"
+                    alt="Foto" class="img-fluid" />
+            </div>
             <div class="col-6">
                 <p><b>Surname:</b> [[*{surname}]]</p>
                 <p>Name: [[*{name}]]</p>
