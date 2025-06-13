@@ -1,8 +1,6 @@
 package org.lessons.java.mymoviedb.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.lessons.java.mymoviedb.model.Movie;
 import org.lessons.java.mymoviedb.service.CategoryService;
@@ -46,10 +44,15 @@ public class MovieController {
             Model model) {
 
         Page<Movie> moviesPage = movieService.findAll(PageRequest.of(page, size, Sort.by("title").ascending()));
+
         model.addAttribute("moviesPage", moviesPage);
         model.addAttribute("movies", moviesPage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", moviesPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+        model.addAttribute("totalElements", moviesPage.getTotalElements());
+        model.addAttribute("numberOfElements", moviesPage.getNumberOfElements());
+
         return "movies/index";
     }
 

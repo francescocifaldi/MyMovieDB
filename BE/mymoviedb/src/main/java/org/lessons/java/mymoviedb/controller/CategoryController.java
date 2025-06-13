@@ -37,6 +37,9 @@ public class CategoryController {
         model.addAttribute("categories", categoriesPage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", categoriesPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+        model.addAttribute("totalElements", categoriesPage.getTotalElements());
+        model.addAttribute("numberOfElements", categoriesPage.getNumberOfElements());
         return "categories/index";
     }
 

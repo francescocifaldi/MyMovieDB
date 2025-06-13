@@ -3,6 +3,7 @@ package org.lessons.java.mymoviedb.security;
 import java.util.Optional;
 
 import org.lessons.java.mymoviedb.model.User;
+import org.lessons.java.mymoviedb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -18,6 +18,10 @@
         <a th:href="@{/directors/create}" class="btn btn-primary">Aggiungi Regista</a>
     </div>
     <div class="container">
+        <p
+            th:text="${currentPage * pageSize + 1} + '-' + (${currentPage * pageSize + numberOfElements}) + ' di ' + ${totalElements} + ' risultati'">
+        </p>
+
         <table class="table">
             <thead>
                 <th>Full Name</th>

@@ -41,6 +41,9 @@ public class DirectorController {
         model.addAttribute("directors", directorsPage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", directorsPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+        model.addAttribute("totalElements", directorsPage.getTotalElements());
+        model.addAttribute("numberOfElements", directorsPage.getNumberOfElements());
         return "directors/index";
     }
 

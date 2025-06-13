@@ -19,6 +19,10 @@
         <a th:href="@{/movies/create}" class="btn btn-primary">Aggiungi Film</a>
     </div>
     <div class="container">
+        <p
+            th:text="${currentPage * pageSize + 1} + '-' + (${currentPage * pageSize + numberOfElements}) + ' di ' + ${totalElements} + ' risultati'">
+        </p>
+
         <table class="table">
             <thead>
                 <th class="w-50">Title</th>
