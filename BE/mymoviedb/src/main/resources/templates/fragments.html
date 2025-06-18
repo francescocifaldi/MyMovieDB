@@ -48,6 +48,32 @@
     <th:block th:fragment="scripts">
         <script th:src="@{/webjars/bootstrap/5.3.5/js/bootstrap.bundle.min.js}"></script>
     </th:block>
+
+    <th:block th:fragment="pagination(currentPage, totalPages, baseRoute)">
+        <div th:if="${totalPages > 1}" class="container d-flex justify-content-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link" th:href="@{__${baseRoute}__(page=${currentPage - 1})}"
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:classappend="${i == currentPage} ? 'active'">
+                        <a class="page-link" th:href="@{__${baseRoute}__(page=${i})}" th:text="${i + 1}">1</a>
+                    </li>
+
+                    <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                        <a class="page-link" th:href="@{__${baseRoute}__(page=${currentPage + 1})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </th:block>
 </body>
 
 </html>

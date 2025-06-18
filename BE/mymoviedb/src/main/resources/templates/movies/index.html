@@ -80,28 +80,7 @@
                 </th:block>
             </tbody>
         </table>
-        <div th:if="${totalPages > 1}" class="container d-flex justify-content-center">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-                        <a class="page-link" th:href="@{/movies(page=${currentPage - 1})}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-
-                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-                        th:classappend="${i == currentPage} ? 'active'">
-                        <a class="page-link" th:href="@{/movies(page=${i})}" th:text="${i + 1}">1</a>
-                    </li>
-
-                    <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
-                        <a class="page-link" th:href="@{/movies(page=${currentPage + 1})}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <div th:replace="fragments :: pagination(${currentPage}, ${totalPages}, '/movies')"></div>
     </div>
     <th:block th:replace="~{fragments :: scripts}"></th:block>
 </body>

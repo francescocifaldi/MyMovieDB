@@ -69,6 +69,8 @@
                 </th:block>
             </tbody>
         </table>
+
+        <div th:replace="fragments :: pagination(${currentPage}, ${totalPages}, '/categories')"></div>
     </div>
 
     <th:block th:replace="~{fragments :: scripts}"></th:block>
